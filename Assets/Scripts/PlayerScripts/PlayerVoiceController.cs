@@ -46,7 +46,9 @@ public class PlayerVoiceController : MonoBehaviour
         actions.Add("down", LookDown);
         actions.Add("look right", LookRight);
         actions.Add("right", LookRight);
+        actions.Add("turn right", LookRight);
         actions.Add("look left", LookLeft);
+        actions.Add("turn left", LookLeft);
         actions.Add("left", LookLeft);
         actions.Add("turn around", TurnAround);
         actions.Add("turn", TurnAround);
