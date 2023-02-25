@@ -278,8 +278,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440667034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.8, z: 1.2}
+  m_LocalPosition: {x: -0.000000030677, y: 0, z: -0.000000029215}
+  m_LocalScale: {x: 1.8175428, y: 1.8, z: 0.90591604}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 688297232}
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 688297231}
-  speed: 12
+  speed: 5
   gravity: -19.62
   jump: 3
   groundCheck: {fileID: 2120933434}
@@ -410,6 +410,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  cameraLook: {fileID: 817560581}
 --- !u!1 &817560577
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,11 +505,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 817560577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b02bca302ae90d446aeaa7128d997f61, type: 3}
+  m_Script: {fileID: 11500000, guid: 898c67eca288cc84d8a4599bf5822b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
+  lookSensitivity: 100
   playerBody: {fileID: 688297232}
+  xRotation: 0
+  cameraX: 0
+  cameraY: 0
 --- !u!1 &920077258
 GameObject:
   m_ObjectHideFlags: 0
