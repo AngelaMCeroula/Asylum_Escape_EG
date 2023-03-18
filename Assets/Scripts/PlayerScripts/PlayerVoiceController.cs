@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Inventory;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
@@ -10,12 +11,13 @@ public class PlayerVoiceController : MonoBehaviour
 {
     public CharacterController controller;
     
-    public float speed = 12f;
-    public float gravity = -19.62f;
-    public float jump = 3f;
+    [SerializeField]private float speed = 12f;
+    [SerializeField]private float gravity = -19.62f;
+    [SerializeField] private float lookSpeed = 0.2f;
+    //[SerializeField]private float jump = 3f;
 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    [SerializeField]private float groundDistance = 0.4f;
     public LayerMask groundMask;
     
     private Vector3 velocity;
@@ -31,11 +33,33 @@ public class PlayerVoiceController : MonoBehaviour
     
     //Camerascript
     public CameraLook cameraLook;
+    //inventory
+    private InventorySystem inventorySystem;
 
 
     private void Start()
     {
-        //movement and camera controls
+        inventorySystem = GetComponent<InventorySystem>();
+        
+        AddKeywords();
+        keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
+        keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
+        keywordRecognizer.Start();
+        Debug.Log(keywordRecognizer.IsRunning.ToString());
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        GroundCheck();
+        Movement();
+        //Talk();
+    }
+
+    void AddKeywords()
+    {
+        //move and look keywords
         actions.Add("forward", MoveForward);
         actions.Add("move", MoveForward);
         actions.Add("walk", MoveForward);
@@ -55,20 +79,12 @@ public class PlayerVoiceController : MonoBehaviour
         actions.Add("look back", TurnAround);
         actions.Add("look front", LookFront);
         actions.Add("front", LookFront);
-
-        keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
-        keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
-        keywordRecognizer.Start();
+        actions.Add("look forward", LookFront);
         
+        //Interaction keywords
+        actions.Add("use", UseItem);
+        actions.Add("pick up", PickUpItem);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        GroundCheck();
-        Movement();
-        //Talk();
     }
 
     void GroundCheck()
@@ -126,11 +142,12 @@ public class PlayerVoiceController : MonoBehaviour
         Debug.Log(speech.text);
         actions[speech.text].Invoke();
     }
+    
+    //---------------------------------------------------Movement
 
     private void MoveForward()
     {
         z = 1;
-
     }
 
     private void Stop()
@@ -139,43 +156,61 @@ public class PlayerVoiceController : MonoBehaviour
         z = 0;
         cameraLook.cameraX = 0f;
         cameraLook.cameraY = 0f;
-
     }
 
     private void TurnAround()
     {
-        
-        transform.localRotation = Quaternion.Euler(0f,180f,0f);
-
+        transform.localRotation = transform.localRotation * Quaternion.Euler(0f,180f,0f);
     }
 
     private void LookUp()
     {
-        cameraLook.cameraY += 0.2f;
-        
+        cameraLook.cameraY = 0;
+        cameraLook.cameraY += lookSpeed;
     }
-
 
     private void LookDown()
     {
-        cameraLook.cameraY -= 0.2f;
-        
+        cameraLook.cameraY = 0;
+        cameraLook.cameraY -= lookSpeed;
     }
 
     private void LookRight()
     {
-        cameraLook.cameraX += 0.2f;
+        cameraLook.cameraX = 0;
+        cameraLook.cameraX += lookSpeed;
     }
 
     private void LookLeft()
     {
-        cameraLook.cameraX -= 0.2f;
+        cameraLook.cameraX = 0;
+        cameraLook.cameraX -= lookSpeed;
     }
 
     private void LookFront()
     {
         cameraLook.xRotation = 0;
-
-
     }
+    
+    //---------------------------------------------------Interaction
+    
+    private void Action()
+    {
+        
+    }
+    private void PickUpItem()
+    {
+        
+    }
+    private void UseItem()
+    {
+        
+    }
+    private void DropItem()
+    {
+        
+    }
+    
+    
+    
 }
