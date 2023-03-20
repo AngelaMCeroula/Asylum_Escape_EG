@@ -20,7 +20,6 @@ namespace Inventory
         {
             _inventoryList.Remove(itemName);
         }
-
         
 
         public bool HasItem(string itemName)

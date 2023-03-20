@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Inventory;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
@@ -35,11 +36,20 @@ public class PlayerVoiceController : MonoBehaviour
     public CameraLook cameraLook;
     //inventory
     private InventorySystem inventorySystem;
+    private ItemBehaviour itemBehaviour;
+    private bool isKeyItemInRange;
+    private bool isInteractableInRange;
+    
+    //SearchableItems
+    private CabinetBehaviour cabinetBehaviour;
 
 
     private void Start()
     {
+        //---------------------Components
         inventorySystem = GetComponent<InventorySystem>();
+        cabinetBehaviour = GameObject.Find("Cabinet").GetComponent<CabinetBehaviour>();
+        
         
         AddKeywords();
         keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
@@ -84,7 +94,63 @@ public class PlayerVoiceController : MonoBehaviour
         //Interaction keywords
         actions.Add("use", UseItem);
         actions.Add("pick up", PickUpItem);
+        actions.Add("search cabinet", SearchCabinet);
 
+    }
+    //---------------------------------------------------Collision check-------------------------
+    /*
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("KeyItem"))
+        {
+            isKeyItemInRange = true;
+            Debug.Log(isKeyItemInRange);
+        }
+        if (other.CompareTag("Interactable"))
+        {
+            isInteractableInRange = true;
+            Debug.Log(isInteractableInRange);
+        }
+        
+        
+        else
+        {
+            isKeyItemInRange = false;
+            isInteractableInRange = false;
+        }
+        
+    }
+    */
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("KeyItem"))
+        {
+            isKeyItemInRange = true;
+            itemBehaviour = other.gameObject.GetComponent<ItemBehaviour>();
+            Debug.Log("KeyItem in range " + isKeyItemInRange);
+        }
+        if (other.CompareTag("Interactable"))
+        {
+            isInteractableInRange = true;
+            Debug.Log("Interactable in range  "+isInteractableInRange);
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("KeyItem"))
+        {
+            isKeyItemInRange = false;
+            itemBehaviour = null;
+            Debug.Log("KeyItem in range " + isKeyItemInRange);
+        }
+        if (other.CompareTag("Interactable"))
+        {
+            isInteractableInRange = false;
+            Debug.Log("Interactable in range  "+isInteractableInRange);
+        }
     }
 
     void GroundCheck()
@@ -147,7 +213,7 @@ public class PlayerVoiceController : MonoBehaviour
 
     private void MoveForward()
     {
-        z = 1;
+        z = speed * Time.deltaTime;
     }
 
     private void Stop()
@@ -198,10 +264,32 @@ public class PlayerVoiceController : MonoBehaviour
     {
         
     }
-    private void PickUpItem()
+    private void SearchCabinet()
     {
+        if (isInteractableInRange == true)
+        {
+            cabinetBehaviour.OpenCabinet();
+        }
+        else
+        {
+            Debug.Log("Where? (You are not close enough)");
+        }
         
     }
+    private void PickUpItem()
+    {
+        if (isKeyItemInRange == true && itemBehaviour != null)
+        {
+            itemBehaviour.AddItem();
+        }
+        
+        else
+        {
+            Debug.Log("Pick up what?");
+        }
+        
+    }
+    
     private void UseItem()
     {
         
@@ -210,7 +298,4 @@ public class PlayerVoiceController : MonoBehaviour
     {
         
     }
-    
-    
-    
 }
