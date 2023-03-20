@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Inventory;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
@@ -10,12 +12,13 @@ public class PlayerVoiceController : MonoBehaviour
 {
     public CharacterController controller;
     
-    public float speed = 12f;
-    public float gravity = -19.62f;
-    public float jump = 3f;
+    [SerializeField]private float speed = 12f;
+    [SerializeField]private float gravity = -19.62f;
+    [SerializeField] private float lookSpeed = 0.2f;
+    //[SerializeField]private float jump = 3f;
 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    [SerializeField]private float groundDistance = 0.4f;
     public LayerMask groundMask;
     
     private Vector3 velocity;
@@ -31,12 +34,48 @@ public class PlayerVoiceController : MonoBehaviour
     
     //Camerascript
     public CameraLook cameraLook;
+    //inventory
+    private InventorySystem inventorySystem;
+    private ItemBehaviour itemBehaviour;
+    private bool isKeyItemInRange;
+    private bool isInteractableInRange;
+    
+    //SearchableItems
+    private CabinetBehaviour cabinetBehaviour;
+    
+    //UI
+    [SerializeField] private GameObject TEXT;
 
 
     private void Start()
     {
-        //movement and camera controls
-        actions.Add("forward", MoveForward);
+        //---------------------Components
+        inventorySystem = GetComponent<InventorySystem>();
+        cabinetBehaviour = GameObject.Find("Cabinet").GetComponent<CabinetBehaviour>();
+        
+        
+        AddKeywords();
+        keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
+        keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
+        keywordRecognizer.Start();
+        Debug.Log(keywordRecognizer.IsRunning.ToString());
+        
+        // test
+        TEXT.SetActive(false);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        GroundCheck();
+        Movement();
+        //Talk();
+    }
+
+    void AddKeywords()
+    {
+        //move and look keywords
         actions.Add("move", MoveForward);
         actions.Add("walk", MoveForward);
         actions.Add("stop", Stop);
@@ -55,20 +94,69 @@ public class PlayerVoiceController : MonoBehaviour
         actions.Add("look back", TurnAround);
         actions.Add("look front", LookFront);
         actions.Add("front", LookFront);
-
-        keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
-        keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
-        keywordRecognizer.Start();
+        actions.Add("look forward", LookFront);
         
+        //Interaction keywords
+        actions.Add("use", UseItem);
+        actions.Add("pick up", PickUpItem);
+        actions.Add("search cabinet", SearchCabinet);
+        actions.Add("fuck you", AppQuit);
 
     }
-
-    // Update is called once per frame
-    void Update()
+    //---------------------------------------------------Collision check-------------------------
+    /*
+    private void OnTriggerStay(Collider other)
     {
-        GroundCheck();
-        Movement();
-        //Talk();
+        if (other.CompareTag("KeyItem"))
+        {
+            isKeyItemInRange = true;
+            Debug.Log(isKeyItemInRange);
+        }
+        if (other.CompareTag("Interactable"))
+        {
+            isInteractableInRange = true;
+            Debug.Log(isInteractableInRange);
+        }
+        
+        
+        else
+        {
+            isKeyItemInRange = false;
+            isInteractableInRange = false;
+        }
+        
+    }
+    */
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("KeyItem"))
+        {
+            isKeyItemInRange = true;
+            itemBehaviour = other.gameObject.GetComponent<ItemBehaviour>();
+            Debug.Log("KeyItem in range " + isKeyItemInRange);
+        }
+        if (other.CompareTag("Interactable"))
+        {
+            isInteractableInRange = true;
+            Debug.Log("Interactable in range  "+isInteractableInRange);
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("KeyItem"))
+        {
+            isKeyItemInRange = false;
+            itemBehaviour = null;
+            Debug.Log("KeyItem in range " + isKeyItemInRange);
+        }
+        if (other.CompareTag("Interactable"))
+        {
+            isInteractableInRange = false;
+            Debug.Log("Interactable in range  "+isInteractableInRange);
+        }
     }
 
     void GroundCheck()
@@ -126,11 +214,12 @@ public class PlayerVoiceController : MonoBehaviour
         Debug.Log(speech.text);
         actions[speech.text].Invoke();
     }
+    
+    //---------------------------------------------------Movement
 
     private void MoveForward()
     {
-        z = 1;
-
+        z = speed * Time.deltaTime;
     }
 
     private void Stop()
@@ -139,43 +228,89 @@ public class PlayerVoiceController : MonoBehaviour
         z = 0;
         cameraLook.cameraX = 0f;
         cameraLook.cameraY = 0f;
-
     }
 
     private void TurnAround()
     {
-        
-        transform.localRotation = Quaternion.Euler(0f,180f,0f);
-
+        transform.localRotation = transform.localRotation * Quaternion.Euler(0f,180f,0f);
     }
 
     private void LookUp()
     {
-        cameraLook.cameraY += 0.2f;
-        
+        cameraLook.cameraY = 0;
+        cameraLook.cameraY += lookSpeed;
     }
-
 
     private void LookDown()
     {
-        cameraLook.cameraY -= 0.2f;
-        
+        cameraLook.cameraY = 0;
+        cameraLook.cameraY -= lookSpeed;
     }
 
     private void LookRight()
     {
-        cameraLook.cameraX += 0.2f;
+        cameraLook.cameraX = 0;
+        cameraLook.cameraX += lookSpeed;
     }
 
     private void LookLeft()
     {
-        cameraLook.cameraX -= 0.2f;
+        cameraLook.cameraX = 0f;
+        cameraLook.cameraX -= lookSpeed;
     }
 
     private void LookFront()
     {
+        cameraLook.cameraY = 0;
         cameraLook.xRotation = 0;
-
+    }
+    
+    //---------------------------------------------------Interaction
+    
+    private void Action()
+    {
+        
+    }
+    private void SearchCabinet()
+    {
+        if (isInteractableInRange == true)
+        {
+            cabinetBehaviour.OpenCabinet();
+        }
+        else
+        {
+            Debug.Log("Where? (You are not close enough)");
+        }
+        
+    }
+    private void PickUpItem()
+    {
+        if (isKeyItemInRange == true && itemBehaviour != null)
+        {
+            itemBehaviour.AddItem();
+        }
+        
+        else
+        {
+            Debug.Log("Pick up what?");
+        }
+        
+    }
+    
+    private void UseItem()
+    {
+        
+    }
+    private void DropItem()
+    {
+        
+    }
+    
+    private void AppQuit()
+    {
+        TEXT.SetActive(true);
+        Debug.Log("Fuck you too");
+        
 
     }
 }
