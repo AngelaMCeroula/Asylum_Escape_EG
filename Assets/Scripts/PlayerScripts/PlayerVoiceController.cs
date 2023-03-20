@@ -42,6 +42,9 @@ public class PlayerVoiceController : MonoBehaviour
     
     //SearchableItems
     private CabinetBehaviour cabinetBehaviour;
+    
+    //UI
+    [SerializeField] private GameObject TEXT;
 
 
     private void Start()
@@ -57,6 +60,9 @@ public class PlayerVoiceController : MonoBehaviour
         keywordRecognizer.Start();
         Debug.Log(keywordRecognizer.IsRunning.ToString());
         
+        // test
+        TEXT.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -70,7 +76,6 @@ public class PlayerVoiceController : MonoBehaviour
     void AddKeywords()
     {
         //move and look keywords
-        actions.Add("forward", MoveForward);
         actions.Add("move", MoveForward);
         actions.Add("walk", MoveForward);
         actions.Add("stop", Stop);
@@ -95,6 +100,7 @@ public class PlayerVoiceController : MonoBehaviour
         actions.Add("use", UseItem);
         actions.Add("pick up", PickUpItem);
         actions.Add("search cabinet", SearchCabinet);
+        actions.Add("fuck you", AppQuit);
 
     }
     //---------------------------------------------------Collision check-------------------------
@@ -249,12 +255,13 @@ public class PlayerVoiceController : MonoBehaviour
 
     private void LookLeft()
     {
-        cameraLook.cameraX = 0;
+        cameraLook.cameraX = 0f;
         cameraLook.cameraX -= lookSpeed;
     }
 
     private void LookFront()
     {
+        cameraLook.cameraY = 0;
         cameraLook.xRotation = 0;
     }
     
@@ -297,5 +304,13 @@ public class PlayerVoiceController : MonoBehaviour
     private void DropItem()
     {
         
+    }
+    
+    private void AppQuit()
+    {
+        TEXT.SetActive(true);
+        Debug.Log("Fuck you too");
+        
+
     }
 }
