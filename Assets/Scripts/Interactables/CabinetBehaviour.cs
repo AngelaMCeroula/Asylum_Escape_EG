@@ -17,18 +17,42 @@ using UnityEngine;
       private void Start()
       {
           inventorySystem = GameObject.Find("Player").GetComponent<InventorySystem>();
-          hammer.SetActive(false); 
-          hammer = GameObject.Find("Screwdriver"); 
+          hammer = GameObject.Find("Hammer");
           cabinetFront = GameObject.Find("CabinetFrontPanel");
+          
+          hammer.SetActive(false);
+       
+      }
+      
+      public void SearchCabinet()
+      {
+          if (cabinetFront != null)
+          {
+              Debug.Log("It's locked");
+          }
+
+          else
+          {
+              Debug.Log("It's open");
+          }
        
       }
 
       public void OpenCabinet()
       {
-          if (cabinetFront != null && inventorySystem.HasItem(neededItemName))
+          if (cabinetFront != null && inventorySystem.HasItem(neededItemName) == true)
           {
               hammer.SetActive(true);
               Destroy(cabinetFront);
+          }
+          else if (inventorySystem.HasItem(neededItemName) != true)
+          {
+              Debug.Log("I don't have a bobby pin");
+          }
+          
+          else
+          {
+              Debug.Log("I can't do that");
           }
       }
    }
