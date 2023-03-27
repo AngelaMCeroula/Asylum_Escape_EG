@@ -6,6 +6,7 @@ TagManager:
   tags:
   - KeyItem
   - Interactable
+  - EXIT
   layers:
   - Default
   - TransparentFX

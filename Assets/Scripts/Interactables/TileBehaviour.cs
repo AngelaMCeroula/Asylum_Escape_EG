@@ -14,22 +14,41 @@ public class TileBehaviour : MonoBehaviour
     private void Start()
     {
         inventorySystem = GameObject.Find("Player").GetComponent<InventorySystem>();
-        key.SetActive(false);
-        
         key = GameObject.Find("Key");
         brokenTile = GameObject.Find("BrokenTile");
         interactableTile = GameObject.Find("InteractableTile");
-        brokenTile.SetActive(false);
         
+        brokenTile.SetActive(false);
+        key.SetActive(false);
+        
+    }
+
+    public void SearchTile()
+    {
+        if (interactableTile != null)
+        {
+            Debug.Log("It's loose");
+        }
+
+        else
+        {
+            Debug.Log("It's broken");
+        }
+       
     }
 
     public void BreakTile()
     {
-        if (brokenTile != null && inventorySystem.HasItem(neededItemName))
+        if (interactableTile != null && inventorySystem.HasItem(neededItemName))
         {
             key.SetActive(true);
             brokenTile.SetActive(true);
             Destroy(interactableTile);
+        }
+        
+        else
+        {
+            Debug.Log("I can't do that");
         }
         
     }
