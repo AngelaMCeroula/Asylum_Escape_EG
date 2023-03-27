@@ -11,11 +11,13 @@ public class DoorBehaviour : MonoBehaviour
     [SerializeField] private string neededItemName;
     private bool doorClosed = true;
     private GameObject doorExitTriggerArea;
+    private LevelManager levelManager;
     
 
     void Start()
     {
         inventorySystem = GameObject.Find("Player").GetComponent<InventorySystem>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         PVC = GameObject.Find("Player").GetComponent<PlayerVoiceController>();
         doorExitTriggerArea = GameObject.Find("DoorExitTrigger");
         doorExitTriggerArea.SetActive(false);
@@ -40,7 +42,7 @@ public class DoorBehaviour : MonoBehaviour
             doorClosed = false;
             PVC._canLeave = true;
             doorExitTriggerArea.SetActive(true);
-            //levelManager.End2_Escape();
+            levelManager.End2_Escape();
             Destroy(gameObject);
         }
         else

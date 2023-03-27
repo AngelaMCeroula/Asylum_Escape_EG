@@ -173,7 +173,7 @@ public class PlayerVoiceController : MonoBehaviour
             nearExit = true;
             if (_canLeave == true)
             {
-                Debug.Log("I can leave though here");
+                Debug.Log("I can leave through here");
             }
         }
         
@@ -415,7 +415,7 @@ public class PlayerVoiceController : MonoBehaviour
             {
                 if (_interactibleBehaviour.interactibleName == "Window")
                 {
-                    //windowBehaviour.BreakGlass();
+                    windowBehaviour.BreakGlass();
                 }
                 else
                 {
