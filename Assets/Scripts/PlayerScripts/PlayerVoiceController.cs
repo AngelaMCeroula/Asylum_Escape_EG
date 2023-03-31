@@ -140,6 +140,9 @@ public class PlayerVoiceController : MonoBehaviour
         //----------UI commands
         actions.Add("pause game", PauseGame);
         actions.Add("resume game", ResumeGame);
+        actions.Add("open journal", OpenJournal);
+        actions.Add("close journal", CloseJournal);
+        actions.Add("help", HelpScreen);
         
         //-------- misc commands
         actions.Add("fuck you", AppQuit);
@@ -541,6 +544,21 @@ public class PlayerVoiceController : MonoBehaviour
     private void ResumeGame()
     {
         levelManager.ResumeGame();
+    }
+
+    private void OpenJournal()
+    {
+        levelManager.OpenJournal();
+    }
+
+    private void CloseJournal()
+    {
+        levelManager.CloseJournal();
+    }
+
+    private void HelpScreen()
+    {
+        levelManager.HelpScreen();
     }
     
     

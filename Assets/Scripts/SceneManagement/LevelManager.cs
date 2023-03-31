@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     //-------------------------------UI CANVAS GameObject
-    public GameObject end1, end2, pauseMenu;
+    public GameObject end1, end2, pauseMenu, journalCanvas, helpCanvas, openJournalButton;
 
     //-----------------------Is Paused bool
     private bool _gameIsPaused;
@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
         end1.SetActive(false);
         end2.SetActive(false);
         pauseMenu.SetActive(false);
+        helpCanvas.SetActive(false);
+        
     }
 
    void Update()
@@ -28,8 +30,18 @@ public class LevelManager : MonoBehaviour
         {
             PauseGame();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused == true)
+        if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused == true)
         {
+            ResumeGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.J) && _gameIsPaused == false)
+        {
+            OpenJournal();
+        }
+        if (Input.GetKeyDown(KeyCode.J) && _gameIsPaused == true)
+        {
+            CloseJournal();
             ResumeGame();
         }
     }
@@ -40,13 +52,16 @@ public class LevelManager : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
         AudioListener.pause = true;
+        openJournalButton.SetActive(false);
 
     }
 
     public void ResumeGame()
     {
-        _gameIsPaused= false;
+        _gameIsPaused = false;
         pauseMenu.SetActive(false);
+        helpCanvas.SetActive(false);
+        openJournalButton.SetActive(true);
         Time.timeScale = 1;
         AudioListener.pause = false;
     }
@@ -56,14 +71,37 @@ public class LevelManager : MonoBehaviour
         end1.SetActive(true);
         Time.timeScale = 0;
         AudioListener.pause = true;
+        openJournalButton.SetActive(false);
     }
     public void End2_Escape()
     {
-        end1.SetActive(true);
+        end2.SetActive(true);
         Time.timeScale = 0;
         AudioListener.pause = true;
+        openJournalButton.SetActive(false);
         
     }
+
+    public void OpenJournal()
+    {
+        openJournalButton.SetActive(false);
+        // animate journal coming into main camera
+        //journalcanvas transform position new
+    }
+
+    public void CloseJournal()
+    {
+        // animate journal returning to place
+    }
+
+    public void HelpScreen()
+    {
+        helpCanvas.SetActive(true);
+        _gameIsPaused = true;
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+    }
     
-    
+
+
 }
