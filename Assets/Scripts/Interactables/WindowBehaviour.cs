@@ -13,6 +13,7 @@ public class WindowBehaviour : MonoBehaviour
     [SerializeField] private string neededItemName2;
     private bool windowIntact = false;
     private GameObject windowExitTriggerArea;
+    [SerializeField] private BreakableWindow _breakableWindow;
 
     void Start()
     {
@@ -40,8 +41,11 @@ public class WindowBehaviour : MonoBehaviour
             windowIntact = false;
             PVC._canLeave = true;
             windowExitTriggerArea.SetActive(true);
+            //break window animation here
+            _breakableWindow.breakWindow();
+
             //levelManager.End2_Escape();
-            Destroy(gameObject);
+
         }
         else
         {

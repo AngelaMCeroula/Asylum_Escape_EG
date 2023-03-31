@@ -42,8 +42,9 @@ public class DoorBehaviour : MonoBehaviour
             doorClosed = false;
             PVC._canLeave = true;
             doorExitTriggerArea.SetActive(true);
-            levelManager.End2_Escape();
-            Destroy(gameObject);
+            //trigger door open animation here
+            
+            //levelManager.End2_Escape();
         }
         else
         {
