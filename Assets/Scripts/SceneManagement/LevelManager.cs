@@ -1,15 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public JournalBehaviour _journalBehaviour;
+    
     //-------------------------------UI CANVAS GameObject
-    public GameObject end1, end2, pauseMenu, journalCanvas, helpCanvas, openJournalButton;
-
-    //-----------------------Is Paused bool
-    private bool _gameIsPaused;
+    public GameObject end1, end2, pauseMenu, helpCanvas, openJournalButton;
+    
+    //-----------------------Bools
+    [HideInInspector]public bool _gameIsPaused;
     
 
     void Start()
@@ -21,7 +24,8 @@ public class LevelManager : MonoBehaviour
         end2.SetActive(false);
         pauseMenu.SetActive(false);
         helpCanvas.SetActive(false);
-        
+
+
     }
 
    void Update()
@@ -35,14 +39,13 @@ public class LevelManager : MonoBehaviour
             ResumeGame();
         }
 
-        if (Input.GetKeyDown(KeyCode.J) && _gameIsPaused == false)
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            OpenJournal();
+            _journalBehaviour.OpenJournal();
         }
-        if (Input.GetKeyDown(KeyCode.J) && _gameIsPaused == true)
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            CloseJournal();
-            ResumeGame();
+            _journalBehaviour.CloseJournal();
         }
     }
 
@@ -82,17 +85,6 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void OpenJournal()
-    {
-        openJournalButton.SetActive(false);
-        // animate journal coming into main camera
-        //journalcanvas transform position new
-    }
-
-    public void CloseJournal()
-    {
-        // animate journal returning to place
-    }
 
     public void HelpScreen()
     {
@@ -102,6 +94,4 @@ public class LevelManager : MonoBehaviour
         AudioListener.pause = true;
     }
     
-
-
 }

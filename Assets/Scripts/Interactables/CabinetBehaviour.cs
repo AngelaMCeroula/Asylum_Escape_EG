@@ -12,14 +12,14 @@ using UnityEngine;
       [SerializeField] private GameObject hammer;
       [SerializeField] private string neededItemName;
       private InventorySystem inventorySystem;
+      private UITextResponseManager _uiTextResponseManager;
 
    
       private void Start()
       {
+          _uiTextResponseManager = GameObject.Find("UITextResponseManager").GetComponent<UITextResponseManager>();
           inventorySystem = GameObject.Find("Player").GetComponent<InventorySystem>();
           hammer = GameObject.Find("Hammer");
-          cabinetFront = GameObject.Find("CabinetFrontPanel");
-          
           hammer.SetActive(false);
        
       }

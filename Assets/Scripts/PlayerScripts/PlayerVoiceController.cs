@@ -11,7 +11,8 @@ using UnityEngine.Windows.Speech;
 public class PlayerVoiceController : MonoBehaviour
 {
     public CharacterController controller;
-    private LevelManager levelManager;
+    public LevelManager levelManager;
+   
     
     [SerializeField]private float speed = 12f;
     [SerializeField]private float gravity = -19.62f;
@@ -55,12 +56,12 @@ public class PlayerVoiceController : MonoBehaviour
     private DoorBehaviour doorBehaviour;
     private WindowBehaviour windowBehaviour;
     
-    //UI
-    //[SerializeField] private GameObject TEXT;
+    //UI Text
+    private UITextResponseManager _uiTextResponseManager;
     
     //CAN LEAVE
-    [HideInInspector]public bool _canLeave = false;
-    private bool nearExit = false;
+    //[HideInInspector]public bool _canLeave = false;
+    //private bool nearExit = false;
     
     
    
@@ -70,6 +71,7 @@ public class PlayerVoiceController : MonoBehaviour
         //---------------------Components
         inventorySystem = GetComponent<InventorySystem>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        _uiTextResponseManager = GameObject.Find("UITextResponseManager").GetComponent<UITextResponseManager>();
         
         cabinetBehaviour = GameObject.Find("Cabinet").GetComponent<CabinetBehaviour>();
         tileBehaviour = GameObject.Find("Tiles").GetComponent<TileBehaviour>();
@@ -134,8 +136,10 @@ public class PlayerVoiceController : MonoBehaviour
         actions.Add("search", Search);
         
         //-----------Exit Commands
+        /*
         actions.Add("leave", EndLevel);
         actions.Add("exit", EndLevel);
+        */
         
         //----------UI commands
         actions.Add("pause game", PauseGame);
@@ -147,6 +151,7 @@ public class PlayerVoiceController : MonoBehaviour
         //-------- misc commands
         actions.Add("fuck you", AppQuit);
         actions.Add("listen to me", ListenHere);
+        actions.Add("can you hear me", CanYouHearMe);
         
         //Debug Commands
         actions.Add("give me everything", AddAllKeyItems);
@@ -169,7 +174,10 @@ public class PlayerVoiceController : MonoBehaviour
             isInteractableInRange = true;
             _interactibleBehaviour = other.gameObject.GetComponent<InteractibleBehaviour>();
             Debug.Log(_interactibleBehaviour.interactibleName+" in range "+isInteractableInRange);
+            _uiTextResponseManager.TextToUI("Mmm");
         }
+        
+        /*
 
         if (other.CompareTag("EXIT"))
         {
@@ -177,8 +185,10 @@ public class PlayerVoiceController : MonoBehaviour
             if (_canLeave == true)
             {
                 Debug.Log("I can leave through here");
+                _uiTextResponseManager.TextToUI("I can leave through here");
             }
         }
+        */
         
     }
 
@@ -196,7 +206,7 @@ public class PlayerVoiceController : MonoBehaviour
         }
         if (other.CompareTag("EXIT"))
         {
-            nearExit = false;
+            //nearExit = false;
         }
     }
 
@@ -254,6 +264,7 @@ public class PlayerVoiceController : MonoBehaviour
     {
         Debug.Log(speech.text);
         actions[speech.text].Invoke();
+        _uiTextResponseManager.recognizedKeywordIndicate();
     }
     
     //---------------------------------------------------Movement
@@ -353,6 +364,7 @@ public class PlayerVoiceController : MonoBehaviour
         
         else
         {
+            _uiTextResponseManager.TextToUI("Pick up what?");
             Debug.Log("Pick up what?");
         }
         
@@ -371,17 +383,20 @@ public class PlayerVoiceController : MonoBehaviour
                 }
                 else
                 {
+                    _uiTextResponseManager.TextToUI("I can't use it here");
                     Debug.Log("I can't use it here");
                 }
             }
             else
             {
-                Debug.Log("Use it where? (You are out of range)");
+                _uiTextResponseManager.TextToUI("Use it where? (Out of range)");
+                Debug.Log("Use it where? (Out of range)");
             }
         }
         else
         {
-            Debug.Log("I don't have a Key");
+            _uiTextResponseManager.TextToUI("I don't have that");
+            Debug.Log("I don't have that");
         }
         
     }
@@ -397,17 +412,20 @@ public class PlayerVoiceController : MonoBehaviour
                 }
                 else
                 {
+                    _uiTextResponseManager.TextToUI("I can't use it here");
                     Debug.Log("I can't use it here");
                 }
             }
             else
             {
+                _uiTextResponseManager.TextToUI("Use it where? (You are out of range)");
                 Debug.Log("Use it where? (You are out of range)");
             }
         }
         else
         {
-            Debug.Log("I don't have a BobbyPin");
+            _uiTextResponseManager.TextToUI("I don't have that");
+            Debug.Log("I don't have that");
         }
     }
     private void UseScrewdriver()
@@ -422,17 +440,20 @@ public class PlayerVoiceController : MonoBehaviour
                 }
                 else
                 {
+                    _uiTextResponseManager.TextToUI("I can't use it here");
                     Debug.Log("I can't use it here");
                 }
             }
             else
             {
+                _uiTextResponseManager.TextToUI("Use it where? (You are out of range)");
                 Debug.Log("Use it where? (You are out of range)");
             }
         }
         else
         {
-            Debug.Log("I don't have a Screwdriver");
+            _uiTextResponseManager.TextToUI("I don't have that");
+            Debug.Log("I don't have that");
         }
         
     }
@@ -453,17 +474,20 @@ public class PlayerVoiceController : MonoBehaviour
                 }
                 else
                 {
+                    _uiTextResponseManager.TextToUI("I can't use it here");
                     Debug.Log("I can't use it here");
                 }
             }
             else
             {
+                _uiTextResponseManager.TextToUI("Use it where? (You are out of range)");
                 Debug.Log("Use it where? (You are out of range)");
             }
         }
         else
         {
-            Debug.Log("I don't have a Hammer");
+            _uiTextResponseManager.TextToUI("I don't have that");
+            Debug.Log("I don't have that");
         }
         
     }
@@ -501,6 +525,7 @@ public class PlayerVoiceController : MonoBehaviour
             
             else if (_interactibleBehaviour == null)
             {
+                _uiTextResponseManager.TextToUI("There is nothing of interest.");
                 Debug.Log("There is nothing of interest");
             }
 
@@ -508,11 +533,13 @@ public class PlayerVoiceController : MonoBehaviour
 
         else
         {
+            _uiTextResponseManager.TextToUI("Search what?");
             Debug.Log("Search what?");
         }
         
     }
 
+    /*
     private void EndLevel()
     {
         if (nearExit && _canLeave)
@@ -521,19 +548,25 @@ public class PlayerVoiceController : MonoBehaviour
         }
         else if (nearExit == true && _canLeave == false)
         {
+            _uiTextResponseManager.TextToUI("Exit is closed.");
             Debug.Log("Exit is closed");
         }
        
         else if (nearExit == false && _canLeave == true)
         {
+            _uiTextResponseManager.TextToUI("Need to go to an exit.");
             Debug.Log("Need to go to an exit");
         }
 
         else
         {
+            _uiTextResponseManager.TextToUI("There is no way out yet");
             Debug.Log("There is no way out yet");
         }
+        
+        
     }
+    */
     
     //-----------------------------------IU COMMANDS
 
@@ -548,12 +581,12 @@ public class PlayerVoiceController : MonoBehaviour
 
     private void OpenJournal()
     {
-        levelManager.OpenJournal();
+        levelManager._journalBehaviour.OpenJournal();
     }
 
     private void CloseJournal()
     {
-        levelManager.CloseJournal();
+        levelManager._journalBehaviour.CloseJournal();
     }
 
     private void HelpScreen()
@@ -565,13 +598,20 @@ public class PlayerVoiceController : MonoBehaviour
     //-----------------------------------MISC COMMANDS
     private void AppQuit()
     {
-        //TEXT.SetActive(true);
+       
+        _uiTextResponseManager.TextToUI("F- you too Buddy");
         Debug.Log("F- you too Buddy");
         
     }
     private void ListenHere()
     { 
+        _uiTextResponseManager.TextToUI("You should calm down, I'm learning");
         Debug.Log("You should calm down, I'm learning");
+    }
+    private void CanYouHearMe()
+    { 
+        _uiTextResponseManager.TextToUI("Yes");
+        Debug.Log("Yes");
     }
 
     private void AddAllKeyItems()

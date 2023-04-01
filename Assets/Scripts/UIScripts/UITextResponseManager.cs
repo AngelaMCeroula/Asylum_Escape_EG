@@ -7,14 +7,15 @@ using TMPro;
 
 public class UITextResponseManager : MonoBehaviour
 {
-    [SerializeField] private GameObject textBox;
+    [SerializeField] private GameObject textBox, recognizedKeywordImg;
     [SerializeField] private TMP_Text _text;
-    [SerializeField] private int waitTimeinSeconds;
+    [SerializeField] private int waitTimeInSeconds;
 
     private void Start()
     {
         textBox.SetActive(false);
         _text.text = null;
+        recognizedKeywordImg.SetActive(false);
     }
 
     public void TextToUI(string text)
@@ -27,9 +28,22 @@ public class UITextResponseManager : MonoBehaviour
 
     async void Wait()
     {
-        await Task.Delay(waitTimeinSeconds * 1000);
+        await Task.Delay(waitTimeInSeconds * 1000);
         textBox.SetActive(false);
         _text.text = null;
+
+    }
+
+    public void recognizedKeywordIndicate()
+    {
+        recognizedKeywordImg.SetActive(true);
+        Wait2();
+    }
+    
+    async void Wait2()
+    {
+        await Task.Delay(1000);
+        recognizedKeywordImg.SetActive(false);
 
     }
 }
