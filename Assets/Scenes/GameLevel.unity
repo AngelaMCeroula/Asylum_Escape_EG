@@ -2428,7 +2428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neededItemName: Hammer
   neededItemName2: Screwdriver
-  _breakableWindow: {fileID: 902755406}
+  windowGlass: {fileID: 902755405}
 --- !u!114 &261911480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2906,7 +2906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 311872890}
   levelManager: {fileID: 0}
-  speed: 8
+  speed: 7
   gravity: -19.62
   groundCheck: {fileID: 544920641}
   groundDistance: 0.4
@@ -9604,7 +9604,7 @@ MonoBehaviour:
   health: 0
   destroyPhysicsTime: 10
   destroyColliderWithPhysics: 1
-  destroySplintersTime: 0
+  destroySplintersTime: 2
   breakingSound: {fileID: 8300000, guid: 5c2f5ca33485fbd42a9e7af0cf292651, type: 3}
   isBroken: 0
   splinters: []

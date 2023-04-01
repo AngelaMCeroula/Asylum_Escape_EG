@@ -13,17 +13,20 @@ public class WindowBehaviour : MonoBehaviour
     [SerializeField] private string neededItemName;
     [SerializeField] private string neededItemName2;
     private bool windowIntact = false;
-    private GameObject windowExitTriggerArea;
-    [SerializeField] private BreakableWindow _breakableWindow;
+    //private GameObject windowExitTriggerArea;
+    //[SerializeField] private BreakableWindow _breakableWindow;
     private UITextResponseManager _uiTextResponseManager;
+
+    [SerializeField] private GameObject windowGlass;
 
     void Start()
     {
         _uiTextResponseManager = GameObject.Find("UITextResponseManager").GetComponent<UITextResponseManager>();
         inventorySystem = GameObject.Find("Player").GetComponent<InventorySystem>();
         PVC = GameObject.Find("Player").GetComponent<PlayerVoiceController>();
-        windowExitTriggerArea = GameObject.Find("WindowExitTrigger");
-        windowExitTriggerArea.SetActive(false);
+        //windowExitTriggerArea = GameObject.Find("WindowExitTrigger");
+        //windowExitTriggerArea.SetActive(false);
+        windowGlass = GameObject.Find("WindowGlass");
     }
     public void SearchWindow()
     {
@@ -41,12 +44,17 @@ public class WindowBehaviour : MonoBehaviour
 
     public void BreakGlass()
     {
-        if ((inventorySystem.HasItem(neededItemName) || inventorySystem.HasItem(neededItemName2)) && windowIntact == true)
+        if (inventorySystem.HasItem(neededItemName))
         {
-            windowIntact = false;
-            _breakableWindow.breakWindow();
+            GlassBreak();
             EndLevelWait();
 
+        }
+        else if(inventorySystem.HasItem(neededItemName2))
+        {
+           
+            GlassBreak();
+            EndLevelWait();
         }
         else
         {
@@ -60,5 +68,12 @@ public class WindowBehaviour : MonoBehaviour
         await Task.Delay(3 * 1000);
         PVC.levelManager.End2_Escape();
     }
-    
+
+    private void GlassBreak()
+    {
+        // breakablewindow not adding rigidbody to the splintters it creates
+        //_breakableWindow.breakWindow();
+        Destroy(windowGlass);
+    }
+
 }

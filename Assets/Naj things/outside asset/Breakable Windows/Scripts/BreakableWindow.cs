@@ -162,7 +162,7 @@ public class BreakableWindow : MonoBehaviour {
         MeshRenderer mr = obj.AddComponent<MeshRenderer>();
         mr.materials = GetComponent<Renderer>().materials;
     }
-
+    
     private void bakeSplinters()
     {
         int[] t = new int[3];
