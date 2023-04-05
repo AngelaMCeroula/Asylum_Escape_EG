@@ -28,7 +28,7 @@ public class WindowBehaviour : MonoBehaviour
         //windowExitTriggerArea.SetActive(false);
         
         windowGlass = GameObject.Find("WindowGlass");
-        if (windowGlass != null || windowGlass.active == false)
+        if (windowGlass != null || windowGlass.activeSelf == true)
         {
             windowIntact = true;
         }
