@@ -2493,6 +2493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neededItemName: Hammer
   neededItemName2: Screwdriver
+  _breakableWindow: {fileID: 902755406}
   windowGlass: {fileID: 902755405}
 --- !u!114 &261911480
 MonoBehaviour:
@@ -10159,7 +10160,7 @@ MonoBehaviour:
   useCollision: 1
   health: 0
   destroyPhysicsTime: 10
-  destroyColliderWithPhysics: 1
+  destroyColliderWithPhysics: 0
   destroySplintersTime: 2
   breakingSound: {fileID: 8300000, guid: 5c2f5ca33485fbd42a9e7af0cf292651, type: 3}
   isBroken: 0

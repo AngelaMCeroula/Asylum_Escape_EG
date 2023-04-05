@@ -177,7 +177,7 @@ public class BreakableWindow : MonoBehaviour {
     {
         int[] t = new int[3];
         splinters = new List<GameObject>();
-        splinterParent = new GameObject("Splinters");
+        splinterParent = new GameObject("Glass Splinters");
         splinterParent.transform.parent = transform;
 
         if (preCalculate) splinterParent.SetActive(false);
@@ -216,7 +216,12 @@ public class BreakableWindow : MonoBehaviour {
                 {
                     for (int i = 0; i < splinters.Count; i++)
                     {
-                        splinters[i].GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
+                        if (splinters != null)
+                        {
+                            splinters[i].AddComponent<Rigidbody>();
+                            splinters[i].GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
+                        }
+                        //splinters[i].GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
                     }
                 }
             }
@@ -227,9 +232,11 @@ public class BreakableWindow : MonoBehaviour {
             }
 
             Physics.IgnoreLayerCollision(layer.value, layer.value, true);
+           
             Destroy(GetComponent<Collider>());
             Destroy(GetComponent<MeshRenderer>());
             Destroy(GetComponent<MeshFilter>());
+            
 
             isBroken = true;            
         }

@@ -26,6 +26,7 @@ public class WindowBehaviour : MonoBehaviour
         PVC = GameObject.Find("Player").GetComponent<PlayerVoiceController>();
         //windowExitTriggerArea = GameObject.Find("WindowExitTrigger");
         //windowExitTriggerArea.SetActive(false);
+        
         windowGlass = GameObject.Find("WindowGlass");
         if (windowGlass != null)
         {
@@ -76,9 +77,9 @@ public class WindowBehaviour : MonoBehaviour
 
     private void GlassBreak()
     {
-        // breakablewindow not adding rigidbody to the splintters it creates
-        _breakableWindow.breakWindow();
-        //Destroy(windowGlass);
+        // breakablewindow trying to access something in splinters but saying that splinters were destroyed
+        //_breakableWindow.breakWindow();
+        windowGlass.SetActive(false);
     }
 
 }
