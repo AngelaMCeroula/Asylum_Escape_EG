@@ -179,7 +179,7 @@ public class PlayerVoiceController : MonoBehaviour
             isInteractableInRange = true;
             _interactibleBehaviour = other.gameObject.GetComponent<InteractibleBehaviour>();
             Debug.Log(_interactibleBehaviour.interactibleName+" in range "+isInteractableInRange);
-            _uiTextResponseManager.TextToUI("Mmm");
+            //_uiTextResponseManager.TextToUI("Mmm");
         }
         
         /*

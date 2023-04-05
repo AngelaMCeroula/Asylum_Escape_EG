@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    //public List<AudioClip> audio;
+    public List<AudioClip> audio;
 }
