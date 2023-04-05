@@ -133,7 +133,7 @@ public class BreakableWindow : MonoBehaviour {
         obj.transform.localScale = transform.localScale;
         obj.transform.rotation = transform.rotation;
         obj.layer = layer.value;
-        obj.name = "Glass Splinter";
+        obj.name = "Splinter";
         if (destroySplintersTime > 0)
             Destroy(obj, destroySplintersTime);
 
@@ -154,13 +154,23 @@ public class BreakableWindow : MonoBehaviour {
         col.convex = true;
         if (destroyPhysicsTime > 0 && destroyColliderWithPhysics) Destroy(col, destroyPhysicsTime);
         
-        Rigidbody rigid = obj.AddComponent<Rigidbody>();
-        rigid.centerOfMass = (v[0] + v[1] + v[2]) / 3f;
-        if (addTorques && preCalculate == false) rigid.AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
-        if (destroyPhysicsTime > 0) Destroy(rigid, destroyPhysicsTime);
+        //Rigidbody rigid = obj.AddComponent<Rigidbody>();
+        
+        // testing
+        if (obj.GetComponent<Rigidbody>() == null)
+        {
+            Rigidbody rigid = obj.AddComponent<Rigidbody>();
+            // add any additional settings to the rigidbody component here
+            
+            rigid.centerOfMass = (v[0] + v[1] + v[2]) / 3f;
+            if (addTorques && preCalculate == false) rigid.AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
+            if (destroyPhysicsTime > 0) Destroy(rigid, destroyPhysicsTime);
 
-        MeshRenderer mr = obj.AddComponent<MeshRenderer>();
-        mr.materials = GetComponent<Renderer>().materials;
+            MeshRenderer mr = obj.AddComponent<MeshRenderer>();
+            mr.materials = GetComponent<Renderer>().materials;
+        }
+        //testing end
+        
     }
     
     private void bakeSplinters()

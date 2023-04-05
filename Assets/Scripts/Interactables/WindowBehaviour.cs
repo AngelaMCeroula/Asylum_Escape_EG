@@ -14,7 +14,7 @@ public class WindowBehaviour : MonoBehaviour
     [SerializeField] private string neededItemName2;
     private bool windowIntact;
     //private GameObject windowExitTriggerArea;
-    //[SerializeField] private BreakableWindow _breakableWindow;
+    [SerializeField] private BreakableWindow _breakableWindow;
     private UITextResponseManager _uiTextResponseManager;
 
     [SerializeField] private GameObject windowGlass;
@@ -77,8 +77,8 @@ public class WindowBehaviour : MonoBehaviour
     private void GlassBreak()
     {
         // breakablewindow not adding rigidbody to the splintters it creates
-        //_breakableWindow.breakWindow();
-        Destroy(windowGlass);
+        _breakableWindow.breakWindow();
+        //Destroy(windowGlass);
     }
 
 }
