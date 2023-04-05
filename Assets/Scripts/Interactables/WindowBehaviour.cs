@@ -12,7 +12,7 @@ public class WindowBehaviour : MonoBehaviour
     private PlayerVoiceController PVC;
     [SerializeField] private string neededItemName;
     [SerializeField] private string neededItemName2;
-    private bool windowIntact = false;
+    private bool windowIntact;
     //private GameObject windowExitTriggerArea;
     //[SerializeField] private BreakableWindow _breakableWindow;
     private UITextResponseManager _uiTextResponseManager;
@@ -27,6 +27,11 @@ public class WindowBehaviour : MonoBehaviour
         //windowExitTriggerArea = GameObject.Find("WindowExitTrigger");
         //windowExitTriggerArea.SetActive(false);
         windowGlass = GameObject.Find("WindowGlass");
+        if (windowGlass != null)
+        {
+            windowIntact = true;
+        }
+            
     }
     public void SearchWindow()
     {

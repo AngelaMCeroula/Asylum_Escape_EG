@@ -12,7 +12,8 @@ public class PlayerVoiceController : MonoBehaviour
 {
     public CharacterController controller;
     public LevelManager levelManager;
-   
+
+    public LayerMask collisionLayer;
     
     [SerializeField]private float speed = 12f;
     [SerializeField]private float gravity = -19.62f;
@@ -103,6 +104,8 @@ public class PlayerVoiceController : MonoBehaviour
         actions.Add("move", MoveForward);
         actions.Add("walk", MoveForward);
         actions.Add("stop", Stop);
+        actions.Add("hold", Stop);
+        actions.Add("hold up", Stop);
         actions.Add("look up", LookUp);
         actions.Add("up", LookUp);
         actions.Add("look down", LookDown);
@@ -160,7 +163,9 @@ public class PlayerVoiceController : MonoBehaviour
 
     }
     //---------------------------------------------------Collision check-------------------------
-    
+
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("KeyItem"))
@@ -274,7 +279,7 @@ public class PlayerVoiceController : MonoBehaviour
         z = speed * Time.deltaTime;
     }
 
-    private void Stop()
+    public void Stop()
     {
         x = 0;
         z = 0;
@@ -533,8 +538,8 @@ public class PlayerVoiceController : MonoBehaviour
 
         else
         {
-            _uiTextResponseManager.TextToUI("Search what?");
-            Debug.Log("Search what?");
+            _uiTextResponseManager.TextToUI("There is nothing close enough to search.");
+            Debug.Log("There is nothing close enough to search.");
         }
         
     }
