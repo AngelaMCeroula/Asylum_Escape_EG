@@ -9,10 +9,21 @@ namespace Inventory
     {
         private List<string> _inventoryList = new List<string>();
         private bool _hasItem;
+        public List<GameObject> inventorySlots;
 
         public void AddItem(string itemName)
         {
             _inventoryList.Add(itemName);
+            
+            foreach (GameObject slot in inventorySlots)
+            {
+                if (slot.activeSelf == false)
+                {
+                    slot.SetActive(true);
+                    slot.GetComponent<TMPro.TextMeshProUGUI>().text = itemName;
+                    break;
+                }
+            }
             
         }
 

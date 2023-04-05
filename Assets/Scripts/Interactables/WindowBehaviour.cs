@@ -14,7 +14,7 @@ public class WindowBehaviour : MonoBehaviour
     [SerializeField] private string neededItemName2;
     private bool windowIntact;
     //private GameObject windowExitTriggerArea;
-    [SerializeField] private BreakableWindow _breakableWindow;
+    private BreakableWindow _breakableWindow;
     private UITextResponseManager _uiTextResponseManager;
 
     [SerializeField] private GameObject windowGlass;
@@ -28,7 +28,7 @@ public class WindowBehaviour : MonoBehaviour
         //windowExitTriggerArea.SetActive(false);
         
         windowGlass = GameObject.Find("WindowGlass");
-        if (windowGlass != null)
+        if (windowGlass != null || windowGlass.active == false)
         {
             windowIntact = true;
         }
@@ -43,8 +43,8 @@ public class WindowBehaviour : MonoBehaviour
         }
         else if (windowIntact == false)
         {
-            Debug.Log("I can LEAVE");
-            _uiTextResponseManager.TextToUI("I can LEAVE");
+            Debug.Log("I can leave now");
+            _uiTextResponseManager.TextToUI("I can leave now.");
         }
     }
 
