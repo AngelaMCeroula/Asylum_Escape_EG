@@ -208,6 +208,7 @@ public class PlayerVoiceController : MonoBehaviour
         {
             isInteractableInRange = false;
             _interactibleBehaviour = null;
+            Debug.Log("interactible out of range");
         }
         if (other.CompareTag("EXIT"))
         {
@@ -392,10 +393,11 @@ public class PlayerVoiceController : MonoBehaviour
                     Debug.Log("I can't use it here");
                 }
             }
+            
             else
             {
-                _uiTextResponseManager.TextToUI("Use it where? (Out of range)");
-                Debug.Log("Use it where? (Out of range)");
+                _uiTextResponseManager.TextToUI("There is nowhere to use it!");
+                Debug.Log("There is nowhere to use it!");
             }
         }
         else
@@ -423,8 +425,8 @@ public class PlayerVoiceController : MonoBehaviour
             }
             else
             {
-                _uiTextResponseManager.TextToUI("Use it where? (You are out of range)");
-                Debug.Log("Use it where? (You are out of range)");
+                _uiTextResponseManager.TextToUI("There is nowhere to use it!");
+                Debug.Log("There is nowhere to use it!");
             }
         }
         else
@@ -451,8 +453,8 @@ public class PlayerVoiceController : MonoBehaviour
             }
             else
             {
-                _uiTextResponseManager.TextToUI("Use it where? (You are out of range)");
-                Debug.Log("Use it where? (You are out of range)");
+                _uiTextResponseManager.TextToUI("There is nowhere to use it!");
+                Debug.Log("There is nowhere to use it!");
             }
         }
         else
@@ -485,8 +487,8 @@ public class PlayerVoiceController : MonoBehaviour
             }
             else
             {
-                _uiTextResponseManager.TextToUI("Use it where? (You are out of range)");
-                Debug.Log("Use it where? (You are out of range)");
+                _uiTextResponseManager.TextToUI("There is nowhere to use it!");
+                Debug.Log("There is nowhere to use it!");
             }
         }
         else

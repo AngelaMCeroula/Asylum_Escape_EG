@@ -2929,10 +2929,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.74
+  m_Radius: 0.6
   m_Height: 0.9999999
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: -1.93}
+  m_Center: {x: 0, y: 0, z: -0.9}
 --- !u!4 &261911482
 Transform:
   m_ObjectHideFlags: 0
@@ -3541,6 +3541,7 @@ GameObject:
   - component: {fileID: 311872889}
   - component: {fileID: 311872888}
   - component: {fileID: 311872892}
+  - component: {fileID: 311872893}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3609,7 +3610,7 @@ CharacterController:
   m_Height: 3.5
   m_Radius: 1.11
   m_SlopeLimit: 1
-  m_StepOffset: 0.1
+  m_StepOffset: 0.01
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0.54}
@@ -3621,7 +3622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311872886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.216, y: 4.489, z: 4.857}
+  m_LocalPosition: {x: -12.216, y: 4.489, z: 4.768}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3647,6 +3648,20 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 2147483647
+--- !u!136 &311872893
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311872886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.4
+  m_Height: 3.88
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0.85}
 --- !u!1001 &313701540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6605,7 +6620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &582476097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18237,7 +18252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06fab6a67c2c42f4d87400158e56b463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _openDoorAnimation: {fileID: 0}
+  _openDoorAnimation: {fileID: 1550275812}
   neededItemName: Key
 --- !u!136 &1523949015
 CapsuleCollider:
@@ -18249,7 +18264,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.14
+  m_Radius: 0.65
   m_Height: 1.42
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: -3.58}
@@ -18554,7 +18569,7 @@ Transform:
   m_GameObject: {fileID: 1550275809}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.351, y: 3.842921, z: 9.067}
-  m_LocalScale: {x: 0.6315833, y: 0.5640136, z: 0.5669}
+  m_LocalScale: {x: 0.6315833, y: 0.56401366, z: 0.5669}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1589894470}

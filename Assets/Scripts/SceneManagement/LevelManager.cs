@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -70,18 +71,23 @@ public class LevelManager : MonoBehaviour
     }
 
     public void End1_Sleep()
-    {
+    {  /*
         end1.SetActive(true);
         Time.timeScale = 0;
         AudioListener.pause = true;
         openJournalButton.SetActive(false);
+        */
+        SceneManager.LoadScene("EndScene 1");
     }
     public void End2_Escape()
     {
+        /*
         end2.SetActive(true);
         Time.timeScale = 0;
         AudioListener.pause = true;
         openJournalButton.SetActive(false);
+        */
+        SceneManager.LoadScene("EndScene 2");
         
     }
 
