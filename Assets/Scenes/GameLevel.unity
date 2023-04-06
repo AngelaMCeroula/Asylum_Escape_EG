@@ -1484,6 +1484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 166865421}
   - component: {fileID: 166865422}
+  - component: {fileID: 166865423}
   m_Layer: 0
   m_Name: Area Light (5)
   m_TagString: Untagged
@@ -1568,6 +1569,20 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &166865423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166865420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c0eee6e176cbe47b7dc19d3e5937f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFlickering: 0
+  timeDelay: 0
 --- !u!1 &178827158
 GameObject:
   m_ObjectHideFlags: 0
@@ -5825,6 +5840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 527998762}
   - component: {fileID: 527998763}
+  - component: {fileID: 527998764}
   m_Layer: 0
   m_Name: Area Light (10)
   m_TagString: Untagged
@@ -5909,6 +5925,20 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &527998764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527998761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c0eee6e176cbe47b7dc19d3e5937f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFlickering: 0
+  timeDelay: 0
 --- !u!1 &539882216
 GameObject:
   m_ObjectHideFlags: 0
@@ -11377,6 +11407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 912295045}
   - component: {fileID: 912295046}
+  - component: {fileID: 912295047}
   m_Layer: 0
   m_Name: Area Light (8)
   m_TagString: Untagged
@@ -11461,6 +11492,20 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &912295047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912295044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c0eee6e176cbe47b7dc19d3e5937f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFlickering: 0
+  timeDelay: 5
 --- !u!1 &920663470
 GameObject:
   m_ObjectHideFlags: 0
@@ -22422,6 +22467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1918838437}
   - component: {fileID: 1918838438}
+  - component: {fileID: 1918838439}
   m_Layer: 0
   m_Name: Area Light (1)
   m_TagString: Untagged
@@ -22506,6 +22552,20 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1918838439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918838436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c0eee6e176cbe47b7dc19d3e5937f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFlickering: 0
+  timeDelay: 0
 --- !u!1001 &1923348012
 PrefabInstance:
   m_ObjectHideFlags: 0
