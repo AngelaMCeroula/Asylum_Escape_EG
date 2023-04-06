@@ -13,7 +13,7 @@ public class PlayerVoiceController : MonoBehaviour
     public CharacterController controller;
     public LevelManager levelManager;
 
-    public LayerMask collisionLayer;
+    //public LayerMask collisionLayer;
     
     [SerializeField]private float speed = 12f;
     [SerializeField]private float gravity = -19.62f;
@@ -103,22 +103,29 @@ public class PlayerVoiceController : MonoBehaviour
         //--------move and look keywords
         actions.Add("move", MoveForward);
         actions.Add("walk", MoveForward);
+        
         actions.Add("stop", Stop);
         actions.Add("hold", Stop);
         actions.Add("hold up", Stop);
+        
         actions.Add("look up", LookUp);
         actions.Add("up", LookUp);
+        
         actions.Add("look down", LookDown);
         actions.Add("down", LookDown);
+        
         actions.Add("look right", LookRight);
         actions.Add("right", LookRight);
         actions.Add("turn right", LookRight);
+        
         actions.Add("look left", LookLeft);
         actions.Add("turn left", LookLeft);
         actions.Add("left", LookLeft);
+        
         actions.Add("turn around", TurnAround);
         actions.Add("turn", TurnAround);
         actions.Add("look back", TurnAround);
+        
         actions.Add("look front", LookFront);
         actions.Add("front", LookFront);
         actions.Add("look forward", LookFront);
@@ -126,6 +133,7 @@ public class PlayerVoiceController : MonoBehaviour
         //--------Interaction keywords
        
         actions.Add("pick up", PickUpItem);
+        actions.Add("search", Search);
         
         
         //-------- Use Commands
@@ -134,9 +142,6 @@ public class PlayerVoiceController : MonoBehaviour
         actions.Add("use screwdriver", UseScrewdriver);
         actions.Add("use bobby pin", UseBobby);
         
-        
-        //-------- search commands
-        actions.Add("search", Search);
         
         //-----------Exit Commands
         /*
@@ -155,6 +160,8 @@ public class PlayerVoiceController : MonoBehaviour
         actions.Add("fuck you", AppQuit);
         actions.Add("listen to me", ListenHere);
         actions.Add("can you hear me", CanYouHearMe);
+        actions.Add("hello", HelloBack);
+        actions.Add("who are you", ItsAMe);
         
         //Debug Commands
         actions.Add("give me everything", AddAllKeyItems);
@@ -178,7 +185,7 @@ public class PlayerVoiceController : MonoBehaviour
         {
             isInteractableInRange = true;
             _interactibleBehaviour = other.gameObject.GetComponent<InteractibleBehaviour>();
-            Debug.Log(_interactibleBehaviour.interactibleName+" in range "+isInteractableInRange);
+            //Debug.Log(_interactibleBehaviour.interactibleName+" in range "+isInteractableInRange);
             //_uiTextResponseManager.TextToUI("Mmm");
         }
         
@@ -236,14 +243,7 @@ public class PlayerVoiceController : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
 
         controller.Move(move * (speed * Time.deltaTime));
-
-        //jump input
-        /*
-        if(Input.GetButtonDown("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jump * -2f * gravity);
-        }
-        */
+        
         
         // gravity 
         velocity.y += gravity * Time.deltaTime;
@@ -277,6 +277,7 @@ public class PlayerVoiceController : MonoBehaviour
 
     private void MoveForward()
     {
+        z = 0;
         z = speed * Time.deltaTime;
     }
 
@@ -370,8 +371,8 @@ public class PlayerVoiceController : MonoBehaviour
         
         else
         {
-            _uiTextResponseManager.TextToUI("Pick up what?");
-            Debug.Log("Pick up what?");
+            _uiTextResponseManager.TextToUI("There is nothing nearby to pick up.");
+            Debug.Log("There is nothing nearby to pick up.");
         }
         
     }
@@ -396,7 +397,7 @@ public class PlayerVoiceController : MonoBehaviour
             
             else
             {
-                _uiTextResponseManager.TextToUI("There is nowhere to use it!");
+                _uiTextResponseManager.TextToUI("I don't see where to use it!");
                 Debug.Log("There is nowhere to use it!");
             }
         }
@@ -505,42 +506,47 @@ public class PlayerVoiceController : MonoBehaviour
     {
         if (isInteractableInRange == true)
         {
-            if (_interactibleBehaviour.interactibleName == "Tile")
-            {
-                tileBehaviour.SearchTile();
-            }
-            
-            if (_interactibleBehaviour.interactibleName == "Cabinet")
-            {
-                cabinetBehaviour.SearchCabinet();
-            }
-            
-            if (_interactibleBehaviour.interactibleName == "Fireplace")
-            {
-                fireplaceBehaviour.SearchFireplace();
-                
-            }
-            if (_interactibleBehaviour.interactibleName == "Door")
-            {
-                doorBehaviour.SearchDoor();
-            }
-            
-            if (_interactibleBehaviour.interactibleName == "Window")
-            {
-                windowBehaviour.SearchWindow();
-            }
-            
-            else if (_interactibleBehaviour == null)
+            if (_interactibleBehaviour == null)
             {
                 _uiTextResponseManager.TextToUI("There is nothing of interest.");
                 Debug.Log("There is nothing of interest");
             }
-
+            
+            else if (_interactibleBehaviour.interactibleName == "Tile")
+            {
+                tileBehaviour.SearchTile();
+            }
+            
+            else if (_interactibleBehaviour.interactibleName == "Cabinet")
+            {
+                cabinetBehaviour.SearchCabinet();
+            }
+            
+            else if (_interactibleBehaviour.interactibleName == "Fireplace")
+            {
+                fireplaceBehaviour.SearchFireplace();
+                
+            }
+            else if (_interactibleBehaviour.interactibleName == "Door")
+            {
+                doorBehaviour.SearchDoor();
+            }
+            
+            else if (_interactibleBehaviour.interactibleName == "Window")
+            {
+                windowBehaviour.SearchWindow();
+            }
+            
+            else if (_interactibleBehaviour.interactibleName == "Cupboard")
+            {
+                _uiTextResponseManager.TextToUI("There is a Bobby Pin.");
+                Debug.Log("There is a Bobby Pin.");
+            }
         }
 
         else
         {
-            _uiTextResponseManager.TextToUI("There is nothing close enough to search.");
+            _uiTextResponseManager.TextToUI("There is nothing interesting close enough to search.");
             Debug.Log("There is nothing close enough to search.");
         }
         
@@ -617,12 +623,26 @@ public class PlayerVoiceController : MonoBehaviour
     }
     private void CanYouHearMe()
     { 
-        _uiTextResponseManager.TextToUI("Yes");
-        Debug.Log("Yes");
+        _uiTextResponseManager.TextToUI("Yes.");
+        Debug.Log("Yes.");
+    }
+    private void HelloBack()
+    { 
+        _uiTextResponseManager.TextToUI("Hello? Who are you?");
+        Debug.Log("Hello? Who are you?");
+    }
+    
+    private void ItsAMe()
+    { 
+        _uiTextResponseManager.TextToUI("It's a me, Mario!");
+        Debug.Log("It's a me, Mario!");
     }
 
     private void AddAllKeyItems()
     {
+        _uiTextResponseManager.TextToUI("You wish!");
+        Debug.Log("You wish!");
+        
         inventorySystem.AddItem("Key");
         inventorySystem.AddItem("Screwdriver");
         inventorySystem.AddItem("Hammer");

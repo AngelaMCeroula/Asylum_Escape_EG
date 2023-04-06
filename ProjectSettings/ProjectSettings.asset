@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: UWL_ExperimentalGames_NA_A1
   productName: Asylum_Escape_EG
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}

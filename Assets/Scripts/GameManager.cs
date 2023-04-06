@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class GameManager : MonoBehaviour
 {
+    
+    [SerializeField] private int waitTimeInSeconds = 1;
     public GameObject howToPlayOverlay;
+    
+    
     //-------------------------SceneManagement
     public void PlayGame()
     {
+        Wait();
         SceneManager.LoadScene("GameLevel");
     }
 
@@ -29,5 +35,11 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    
+    async void Wait()
+    {
+        await Task.Delay(waitTimeInSeconds * 1000);
+        
     }
 }
