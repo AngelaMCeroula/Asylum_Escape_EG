@@ -15,6 +15,8 @@ public class DoorBehaviour : MonoBehaviour
     private GameObject doorExitTriggerArea;
     private LevelManager levelManager;
     private UITextResponseManager _uiTextResponseManager;
+    public AudioSource _audioSource;
+    public AudioSource _audioSource2;
     
 
     void Start()
@@ -46,15 +48,22 @@ public class DoorBehaviour : MonoBehaviour
         if (inventorySystem.HasItem(neededItemName) && doorClosed == true)
         {
             doorClosed = false;
-            doorExitTriggerArea.SetActive(true);
-            //trigger door open animation here
-            _openDoorAnimation.OpenDoorTrigger();
+            //doorExitTriggerArea.SetActive(true);
+            _audioSource.PlayOneShot(_audioSource.clip, 1);
+            SecondIntWait();
             EndLevelWait();
         }
         else
         {
             _uiTextResponseManager.TextToUI("I can't do that");
             Debug.Log("I can't do that");
+        }
+
+        async void SecondIntWait()
+        {
+            await Task.Delay(1 * 1000);
+            _audioSource2.PlayOneShot(_audioSource.clip, 1);
+            _openDoorAnimation.OpenDoorTrigger();
         }
 
         async void EndLevelWait()

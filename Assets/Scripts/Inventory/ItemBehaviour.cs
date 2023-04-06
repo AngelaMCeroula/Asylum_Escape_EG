@@ -11,6 +11,8 @@ namespace Inventory
     {
         public string itemName;
         private InventorySystem inventorySystem;
+        public AudioSource _audioSource;
+        
 
         private void Awake()
         {
@@ -19,6 +21,7 @@ namespace Inventory
 
         public void AddItem()
         {
+            _audioSource.PlayOneShot(_audioSource.clip, 1);
             inventorySystem.AddItem(itemName);
             Destroy(gameObject);
         }

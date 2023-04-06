@@ -13,7 +13,7 @@ using UnityEngine;
       [SerializeField] private string neededItemName;
       private InventorySystem inventorySystem;
       private UITextResponseManager _uiTextResponseManager;
-
+      public AudioSource _audioSource;
    
       private void Start()
       {
@@ -43,6 +43,7 @@ using UnityEngine;
           if (cabinetFront != null && inventorySystem.HasItem(neededItemName) == true)
           {
               hammer.SetActive(true);
+              _audioSource.PlayOneShot(_audioSource.clip, 1);
               Destroy(cabinetFront);
           }
           else if (inventorySystem.HasItem(neededItemName) != true)

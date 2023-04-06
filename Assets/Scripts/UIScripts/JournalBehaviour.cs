@@ -10,13 +10,16 @@ public class JournalBehaviour : MonoBehaviour
     [SerializeField]private GameObject openJournalButton;
     private LevelManager _levelManager;
     
-    private bool _journalOpen;
+    //[HideInInspector]public bool _journalIsOpen;
+
+    [HideInInspector]public bool _journalOpen;
     private Animator _animator;
     
     private void Start()
     {
         _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         _animator = gameObject.GetComponent<Animator>();
+        
     }
 
     public void OpenJournal()

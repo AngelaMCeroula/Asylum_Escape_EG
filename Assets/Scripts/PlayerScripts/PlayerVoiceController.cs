@@ -59,7 +59,9 @@ public class PlayerVoiceController : MonoBehaviour
     
     //UI Text
     private UITextResponseManager _uiTextResponseManager;
-    
+
+
+    private AudioSource _audioSource;
     //CAN LEAVE
     //[HideInInspector]public bool _canLeave = false;
     //private bool nearExit = false;
@@ -73,6 +75,7 @@ public class PlayerVoiceController : MonoBehaviour
         inventorySystem = GetComponent<InventorySystem>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         _uiTextResponseManager = GameObject.Find("UITextResponseManager").GetComponent<UITextResponseManager>();
+        _audioSource = GetComponent<AudioSource>();
         
         cabinetBehaviour = GameObject.Find("Cabinet").GetComponent<CabinetBehaviour>();
         tileBehaviour = GameObject.Find("Tiles").GetComponent<TileBehaviour>();
@@ -279,6 +282,8 @@ public class PlayerVoiceController : MonoBehaviour
     {
         z = 0;
         z = speed * Time.deltaTime;
+        _audioSource.Play();
+        
     }
 
     public void Stop()
@@ -287,6 +292,7 @@ public class PlayerVoiceController : MonoBehaviour
         z = 0;
         cameraLook.cameraX = 0f;
         cameraLook.cameraY = 0f;
+        _audioSource.Stop();
     }
 
     private void TurnAround()

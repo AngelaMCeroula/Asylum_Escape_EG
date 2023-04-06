@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     
     //-----------------------Bools
     [HideInInspector]public bool _gameIsPaused;
+   
     
 
     void Start()
@@ -33,18 +34,26 @@ public class LevelManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused == false)
         {
+            Debug.Log("PAUSE");
             PauseGame();
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused == true)
-        {
+        else if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused == true)
+        { 
+            Debug.Log("RESUME");
             ResumeGame();
+            
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Escape key was pressed");
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) && _journalBehaviour._journalOpen == false)
         {
             _journalBehaviour.OpenJournal();
         }
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) && _journalBehaviour._journalOpen == true)
         {
             _journalBehaviour.CloseJournal();
         }

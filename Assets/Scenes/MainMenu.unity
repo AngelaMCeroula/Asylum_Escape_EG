@@ -2971,7 +2971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d6f62742960734da501cfa000ca1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: []
 --- !u!4 &795157822
 Transform:
   m_ObjectHideFlags: 0
@@ -3617,6 +3616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a534dd90dc200141b89ca937e7744cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTimeInSeconds: 1
   howToPlayOverlay: {fileID: 940387758}
 --- !u!4 &983828492
 Transform:
