@@ -29,11 +29,13 @@ using UnityEngine;
           if (cabinetFront != null)
           {
               Debug.Log("It's locked");
+              _uiTextResponseManager.TextToUI("It's locked");
           }
 
           else
           {
               Debug.Log("It's open");
+              _uiTextResponseManager.TextToUI("It's open");
           }
        
       }
@@ -49,11 +51,13 @@ using UnityEngine;
           else if (inventorySystem.HasItem(neededItemName) != true)
           {
               Debug.Log("I don't have a bobby pin");
+              _uiTextResponseManager.TextToUI("I don't have a bobby pin.");
           }
           
           else
           {
               Debug.Log("I can't do that");
+              _uiTextResponseManager.TextToUI("I can't do that.");
           }
       }
    }
