@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private int waitTimeInSeconds = 1;
     public GameObject howToPlayOverlay;
+    public GameObject WishperingVoices;
     
     
     //-------------------------SceneManagement
@@ -41,5 +42,15 @@ public class GameManager : MonoBehaviour
     {
         await Task.Delay(waitTimeInSeconds * 1000);
         
+    }
+
+    public void VoicesON()
+    {
+        WishperingVoices.SetActive(true);
+    }
+    
+    public void VoicesOFF()
+    {
+        WishperingVoices.SetActive(false);
     }
 }

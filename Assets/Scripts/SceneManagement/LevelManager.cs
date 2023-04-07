@@ -34,20 +34,16 @@ public class LevelManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused == false)
         {
-            Debug.Log("PAUSE");
+            
             PauseGame();
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused == true)
         { 
-            Debug.Log("RESUME");
+            
             ResumeGame();
             
         }
         
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Debug.Log("Escape key was pressed");
-        }
 
         if (Input.GetKeyDown(KeyCode.J) && _journalBehaviour._journalOpen == false)
         {

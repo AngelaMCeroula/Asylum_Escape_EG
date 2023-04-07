@@ -18,6 +18,8 @@ public class WindowBehaviour : MonoBehaviour
     private UITextResponseManager _uiTextResponseManager;
 
     [SerializeField] private GameObject windowGlass;
+    
+    public AudioSource _audioSource;
 
     void Start()
     {
@@ -79,7 +81,10 @@ public class WindowBehaviour : MonoBehaviour
     {
         // breakablewindow trying to access something in splinters but saying that splinters were destroyed
         //_breakableWindow.breakWindow();
+        
+        _audioSource.PlayOneShot(_audioSource.clip, 1);
         windowGlass.SetActive(false);
+
     }
 
 }

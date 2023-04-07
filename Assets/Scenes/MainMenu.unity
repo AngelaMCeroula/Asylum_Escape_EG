@@ -2971,6 +2971,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d6f62742960734da501cfa000ca1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  responses: []
+  _UIButtonClick: {fileID: 8300000, guid: a4feaf5f3eece774c9b8e0474a0b15e3, type: 3}
 --- !u!4 &795157822
 Transform:
   m_ObjectHideFlags: 0
@@ -3618,6 +3620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTimeInSeconds: 1
   howToPlayOverlay: {fileID: 940387758}
+  WishperingVoices: {fileID: 0}
 --- !u!4 &983828492
 Transform:
   m_ObjectHideFlags: 0
@@ -5382,6 +5385,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 795157821}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: UIButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1527344707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6309,6 +6324,18 @@ MonoBehaviour:
       - m_Target: {fileID: 983828491}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Help
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 795157821}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: UIButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

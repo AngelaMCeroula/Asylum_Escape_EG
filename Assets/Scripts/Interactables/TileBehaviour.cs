@@ -11,6 +11,7 @@ public class TileBehaviour : MonoBehaviour
     [SerializeField] private string neededItemName;
     private InventorySystem inventorySystem;
     private UITextResponseManager _uiTextResponseManager;
+    public AudioSource _audioSource;
 
     private void Start()
     {
@@ -47,9 +48,10 @@ public class TileBehaviour : MonoBehaviour
         {
             key.SetActive(true);
             brokenTile.SetActive(true);
-            Destroy(interactableTile);
+            _audioSource.PlayOneShot(_audioSource.clip, 1);
             Debug.Log("There's a Key underneath");
             _uiTextResponseManager.TextToUI("There's a Key underneath");
+            Destroy(interactableTile);
         }
         
         else
