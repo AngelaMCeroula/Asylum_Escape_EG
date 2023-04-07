@@ -75,6 +75,22 @@ public class LevelManager : MonoBehaviour
         AudioListener.pause = false;
     }
 
+    public void MainMenu()
+    {
+        if (_gameIsPaused)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
+    public void QuitGame()
+    {
+        if (_gameIsPaused)
+        {
+            Application.Quit();
+        }
+    }
+
     public void End1_Sleep()
     {  /*
         end1.SetActive(true);

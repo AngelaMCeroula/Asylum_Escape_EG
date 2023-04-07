@@ -155,12 +155,16 @@ public class PlayerVoiceController : MonoBehaviour
         //----------UI commands
         actions.Add("pause game", PauseGame);
         actions.Add("resume game", ResumeGame);
+        actions.Add("resume", ResumeGame);
+        actions.Add("main menu", MainMenu);
+        actions.Add("quit", QuitGame);
+        actions.Add("quit game", QuitGame);
         actions.Add("open journal", OpenJournal);
         actions.Add("close journal", CloseJournal);
         actions.Add("help", HelpScreen);
         
         //-------- misc commands
-        actions.Add("fuck you", AppQuit);
+        actions.Add("fuck you", FYou);
         actions.Add("listen to me", ListenHere);
         actions.Add("can you hear me", CanYouHearMe);
         actions.Add("hello", HelloBack);
@@ -603,6 +607,15 @@ public class PlayerVoiceController : MonoBehaviour
         levelManager._journalBehaviour.OpenJournal();
     }
 
+    private void MainMenu()
+    {
+        levelManager.MainMenu();
+    }
+    private void QuitGame()
+    {
+        levelManager.QuitGame();
+    }
+
     private void CloseJournal()
     {
         levelManager._journalBehaviour.CloseJournal();
@@ -615,7 +628,7 @@ public class PlayerVoiceController : MonoBehaviour
     
     
     //-----------------------------------MISC COMMANDS
-    private void AppQuit()
+    private void FYou()
     {
        
         _uiTextResponseManager.TextToUI("F- you too Buddy");
