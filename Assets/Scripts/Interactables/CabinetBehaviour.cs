@@ -31,6 +31,11 @@ using UnityEngine;
               Debug.Log("It's locked");
               _uiTextResponseManager.TextToUI("It's locked");
           }
+          else if (cabinetFront == null || hammer != null)
+          {
+              Debug.Log("There is a hammer inside");
+              _uiTextResponseManager.TextToUI("There is a Hammer inside");
+          }
 
           else
           {
